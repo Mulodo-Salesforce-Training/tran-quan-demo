@@ -1,0 +1,80 @@
+<aura:component controller="sendEmailLCCC" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="contactList" type="Contact[]"/>
+    <div style="background-color:white;padding:10px;">
+        	<lightning:tabset>
+                <lightning:tab label="Send Email">
+                    <div class="row">
+                        <lightning:input name="To" label="To" aura:id="inputTo"/>
+                        <lightning:input name="CC" label="CC" aura:id="inputCC"/>
+                        <lightning:input name="BBC" label="BBC" aura:id="inputBBC" />
+                        <lightning:input name="Subject" label="Subject" aura:id="inputSubject" />
+                        <lightning:input name="Body" label="Body" aura:id="inputBody"/>
+                        <lightning:inputRichText aura:id="inputRichText">
+       					 <lightning:insertImageButton/>
+    					</lightning:inputRichText>
+                        <lightning:button variant="brand" label="Send Email" title="Send Email" onclick="{! c.handleClick }"/>
+                	</div>
+                        
+                </lightning:tab>
+                <lightning:tab label="List Email" title="2nd tab extended title">
+                   <table class="slds-table slds-table_bordered slds-table_cell-buffer" > 
+                        <thead>
+                            <tr class="slds-text-title_caps">
+                                <th scope="col">
+                                    <div class="slds-truncate">S.No</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="To">To</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="CC">CC</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="BBC">BBC</div>
+                                </th>
+                                 <th scope="col">
+                                    <div class="slds-truncate" title="Subject">Subject</div>
+                                </th>
+                                 <th scope="col">
+                                    <div class="slds-truncate" title="Body">Body</div>
+                                </th>
+                                 <th scope="col">
+                                    <div class="slds-truncate" title="Upload">Upload</div>
+                                </th>
+                            </tr>
+                        </thead>   
+                        <tbody>
+                            
+                            <aura:iteration items="{!v.contactList}" var="ContactInstance" indexVar="rowIndex">
+                          <tr class="slds-text-title_caps">
+                        <td> 
+                            {!rowIndex + 1}
+                        </td>
+                        <td>
+                            <ui:outputText class="slds-input" value="{!ContactInstance.To}"/>
+                        </td>
+                        <td>
+                            <ui:outputText class="slds-input" value="{!ContactInstance.CC}"/>
+                        </td>
+                        <td>
+                            <ui:outputText class="slds-input" value="{!ContactInstance.BBC}"/>
+                        </td>
+                        <td>
+                             <ui:outputText class="slds-input" value="{!ContactInstance.Subject}"/>
+                        </td>
+                        <td>
+                             <ui:outputText class="slds-input" value="{!ContactInstance.Body}"/>
+                        </td>
+                        <td>
+                             <ui:outputText class="slds-input" value="{!ContactInstance.Upload}"/>
+                        </td>
+                    </tr>
+                            </aura:iteration>
+                        </tbody>
+                    </table>
+                </lightning:tab>
+            </lightning:tabset>
+    </div>
+    
+</aura:component>

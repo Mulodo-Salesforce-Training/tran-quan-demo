@@ -4,5 +4,9 @@
         <members>sendEmailLCCC</members>
         <name>ApexClass</name>
     </types>
+    <types>
+        <members>SendMail</members>
+        <name>AuraDefinitionBundle</name>
+    </types>
     <version>36.0</version>
 </Package>
