@@ -1,1 +1,16 @@
-{}
+{
+    "sendEmailLCCC.cls": {
+        "createdById": "0056F00000AATPOQA5",
+        "createdByName": "tran quan",
+        "createdDate": "2019-01-29T03:51:35.000Z",
+        "fileName": "unpackaged/classes/sendEmailLCCC.cls",
+        "fullName": "sendEmailLCCC",
+        "id": "01p6F00000QGLeEQAX",
+        "lastModifiedById": "0056F00000AATPOQA5",
+        "lastModifiedByName": "tran quan",
+        "lastModifiedDate": "2019-01-29T09:00:51.000Z",
+        "manageableState": "unmanaged",
+        "type": "ApexClass",
+        "mmState": "clean"
+    }
+}
