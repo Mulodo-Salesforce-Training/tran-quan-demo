@@ -1,6 +1,15 @@
 <aura:component controller="sendEmailLCCC" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
-    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
-    <aura:attribute name="contactList" type="Contact[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    <aura:attribute name="message" type="String"/>
+    <aura:attribute name="recipients" type="Recipient__c[]"/>
+    <aura:attribute name="accept" type="List" default="['.jpg', '.jpeg']"/>
+    <aura:attribute name="multiple" type="Boolean" default="false"/>
+    <aura:attribute name="disabled" type="Boolean" default="false"/>
+    
+    <!-- attributes -->
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <p>Message : {!v.message}</p>
     <div style="background-color:white;padding:10px;">
         	<lightning:tabset>
                 <lightning:tab label="Send Email">
@@ -9,12 +18,18 @@
                         <lightning:input name="CC" label="CC" aura:id="inputCC"/>
                         <lightning:input name="BBC" label="BBC" aura:id="inputBBC" />
                         <lightning:input name="Subject" label="Subject" aura:id="inputSubject" />
-                        <lightning:input name="Body" label="Body" aura:id="inputBody"/>
-                        <lightning:inputRichText aura:id="inputRichText">
+                        <lightning:inputRichText label="Body" aura:id="inputBody">
        					 <lightning:insertImageButton/>
     					</lightning:inputRichText>
+                        <lightning:fileUpload  name="fileUploader"
+                           label= "Upload Image"
+                           multiple="{!v.multiple}"
+                           accept="{!v.accept}"
+                           disabled="{!v.disabled}"
+                           recordId="{!v.recordId}"
+                           onuploadfinished="{! c.handleUploadFinished }"/>
                         <lightning:button variant="brand" label="Send Email" title="Send Email" onclick="{! c.handleClick }"/>
-                	</div>
+                    </div>
                         
                 </lightning:tab>
                 <lightning:tab label="List Email" title="2nd tab extended title">
@@ -46,33 +61,42 @@
                         </thead>   
                         <tbody>
                             
-                            <aura:iteration items="{!v.contactList}" var="ContactInstance" indexVar="rowIndex">
+                            <aura:iteration items="{!v.recipients}" var="ContactInstance" indexVar="rowIndex">
                           <tr class="slds-text-title_caps">
                         <td> 
                             {!rowIndex + 1}
                         </td>
                         <td>
-                            <ui:outputText class="slds-input" value="{!ContactInstance.To}"/>
+                            <ui:outputText class="slds-input" value="{!ContactInstance.To__c}"/>
                         </td>
                         <td>
-                            <ui:outputText class="slds-input" value="{!ContactInstance.CC}"/>
+                            <ui:outputText class="slds-input" value="{!ContactInstance.CC__c}"/>
                         </td>
                         <td>
-                            <ui:outputText class="slds-input" value="{!ContactInstance.BBC}"/>
+                            <ui:outputText class="slds-input" value="{!ContactInstance.BCC__c}"/>
                         </td>
                         <td>
-                             <ui:outputText class="slds-input" value="{!ContactInstance.Subject}"/>
+                             <ui:outputText class="slds-input" value="{!ContactInstance.Subject__c}"/>
                         </td>
                         <td>
-                             <ui:outputText class="slds-input" value="{!ContactInstance.Body}"/>
+                             <ui:outputText class="slds-input" value="{!ContactInstance.Body__c}"/>
                         </td>
                         <td>
-                             <ui:outputText class="slds-input" value="{!ContactInstance.Upload}"/>
+                            .....
                         </td>
                     </tr>
                             </aura:iteration>
                         </tbody>
                     </table>
+                </lightning:tab>
+                <lightning:tab label="List Email">
+                    <div style="height: 300px">
+                        <lightning:datatable
+                                keyField="id"
+                                data="{! v.data }"
+                                columns="{! v.columns }"
+                                hideCheckboxColumn="true"/>
+                    </div>
                 </lightning:tab>
             </lightning:tabset>
     </div>

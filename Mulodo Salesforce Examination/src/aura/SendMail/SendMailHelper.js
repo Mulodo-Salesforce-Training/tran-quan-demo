@@ -1,11 +1,12 @@
 ({
-	fetchData2: function (cmp, fetchData, numberOfRecords) {
-     	var value = cmp.get('v.value');
-        value.callback
-	},
+	fetchData: function (cmp, fetchData, numberOfRecords) {
+       
+       
+    },
     createObjectData: function(component, event) {
         // get the contactList from component and add(push) New Object to List  
         var RowItemList = component.get("v.contactList");
+        console.log("action",action);
         RowItemList.push({
             'sobjectType': 'Contact',
             'To': 'quandevkaizen@gmail.com',
@@ -15,7 +16,7 @@
             'Body':'tks gift',
             'Upload':'sex.com'
         });
-      
+      	
         // set the updated list to attribute (contactList) again    
         
         
